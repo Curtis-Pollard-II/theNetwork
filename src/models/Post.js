@@ -3,7 +3,9 @@ export class Post {
         this.imgUrl = data.imgUrl
         this.body = data.body
         this.creatorId = data.creatorId
+        this.creator = data.creator
         this.likeIds = data.likeIds
+        this.createdAt = data.createdAt
         
     }
 }
