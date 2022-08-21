@@ -1,4 +1,7 @@
 <template>
+<div>
+  <PostForm />
+</div>
   <div class="container">
     <div class="row d-flex justify-content-center">
       <div class="col-md-7" v-for="(p, index) in posts" :key="index">

@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="handleSubmit">
 
-    <p>Create a post</p>
+    <p><b>  Create a post </b></p>
     <input type="text" placeholder="body" v-model="editable.body" />
     <input type="text" placeholder="image url" v-model="editable.imgUrl" />
     <button class="btn btn-primary">{{ editable.id ? 'Save' : 'Create' }}</button>
@@ -12,11 +12,12 @@
 
 
 <script>
+import { postsService } from '../services/PostsService.js';
 import { ref, watchEffect } from 'vue';
 import { AppState } from '../AppState.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
-import { postsService } from '../services/postsService.js';
+
 
 export default {
   setup() {

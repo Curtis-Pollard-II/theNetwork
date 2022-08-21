@@ -24,21 +24,39 @@
             }}</p>
       </div>
       <div class="col-md-4">
-        <p>{{ post.creator.name }}</p>
+        <router-link :to="{ name: 'Profile', params: { profileId: post.creatorId } }">
+          <p class="selectable">{{ post.creator.name }}</p>
+        </router-link>
       </div>
+    </div>
+    <div v-if="post.creatorId == account.id">
+        <router-link :to="{ name: 'Profile', params: { profileId: post.creatorId } }">
+          <p class="selectable">{{ post.creator.name }}</p>
+        </router-link>
     </div>
   </div>
 </template>
 
 
 <script>
+import { ref } from '@vue/reactivity';
 import { Post } from "../models/Post";
+import { AppState } from '../AppState';
 export default {
   props: {
     post: { type: Post, required: true },
   },
   setup() {
-    return {};
+
+    const editing = ref(false)
+    return {
+      editing,
+      account: computed(() => AppState.account),
+      toggleEdit(){
+        AppState.activePost = props.post
+        this.editing = !this.editing
+      }
+    };
   },
 };
 </script>

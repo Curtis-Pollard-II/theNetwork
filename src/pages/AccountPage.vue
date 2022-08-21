@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row my-3">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <AccountForm />
       </div>
     </div>
