@@ -61,8 +61,8 @@ class PostsService {
                 query: searchText
             }
         })
-        logger.log(res.data.posts, 'searched posts')
-        AppState.posts = res.data.posts.map(m => new Post(m))
+        logger.log(res.data.searchedPosts, 'searched posts')
+        AppState.searchedPosts = res.data.posts.map(m => new Post(m))
     }
 
     async likePost(postData){

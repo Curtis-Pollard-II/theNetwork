@@ -1,13 +1,14 @@
 <template>
-  <form @submit.prevent="handleSubmit">
-
-    <p><b>  Create a post </b></p>
-    <input type="text" placeholder="body" v-model="editable.body" />
-    <input type="text" placeholder="image url" v-model="editable.imgUrl" />
-    <button class="btn btn-primary">{{ editable.id ? 'Save' : 'Create' }}</button>
-
-
-  </form>
+  <div class="container">
+    <form @submit.prevent="handleSubmit">
+      <p class="text-center fs-5"><b>  Create a post </b></p>
+      <div class="row form-control d-flex justify-content-between">
+        <input class="col-md-3" type="text" placeholder="body" v-model="editable.body" />
+        <input class="col-md-3" type="text" placeholder="image url" v-model="editable.imgUrl" />
+        <button class="col-md-3 btn btn-primary">{{ editable.id ? 'Save' : 'Create' }}</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 

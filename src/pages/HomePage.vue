@@ -4,7 +4,7 @@
 </div>
   <div class="container">
     <div class="row d-flex justify-content-center">
-      <div class="col-md-9" v-for="(p, index) in posts" :key="index">
+      <div class="col-md-9 p-3" v-for="(p, index) in posts" :key="index">
         <PostCard :post="p" />
       </div>
     </div>

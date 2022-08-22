@@ -3,10 +3,11 @@ export class Profile {
       this.id = data.id
       this.name = data.name
       this.picture = data.picture
-      this.coverImg = data.coverImg
-      this.linkedin = data.linkedin
-      this.graduated = data.graduated
-      this.github = data.github
+      this.coverImg = data.coverImg 
+      this.linkedin = data.linkedin || '🔗'
+      this.graduated = data.graduated || '🎓'
+      this.github = data.github || '💻'
       this.class = data.class
+      this.bio = data.bio
     }
   }

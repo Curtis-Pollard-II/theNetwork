@@ -8,9 +8,9 @@
       <img :src="profile.picture" alt="">
       <h3>{{ profile.name }}</h3>
       <p>{{ profile.bio }}</p>
-      <p>{{ profile.github }}</p>
-      <p>{{ profile.linkedin }}</p>
-      <p>{{ profile.class }}</p>
+      <p>{{ profile.github || "💻"}}</p>
+      <p>{{ profile.linkedin || "🔗" }}</p>
+      <p>{{ profile.class || "class of ______" }}</p>
       <p v-if="profile.graduated">Graduated</p>
         <p v-else>😿Not Graduated😿</p>
 

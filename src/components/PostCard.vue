@@ -1,18 +1,20 @@
 <template>
   <div class="container bg-light text-dark">
     <div class="row">
-      <img class="post-img" :src="post.imgUrl" alt="" />
-      <p>{{ post.creator.name }}</p>
-      <p class="fs-8">{{ post.body }}</p>
+      <img class="post-img col-5" :src="post.imgUrl" alt="" />
+      <div class="col-7">
+        <p class="fs-5">{{ post.creator.name }}</p>
+        <p class="fs-8">{{ post.body }}</p>
+      </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-4">
+    <div class="row d-flex">
+      <div class="col-md-4 text-center">
         <p class="selectable" @click="likePost(post)">
-          {{ post.likeIds.length }}
+         👍  <b>{{ post.likeIds.length }}</b>  👍
         </p>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 text-center">
         <p>
           {{
             new Date(post.createdAt).toLocaleDateString("pt-BR", {
@@ -22,7 +24,7 @@
           }}
         </p>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-4 text-center">
         <router-link
           :to="{ name: 'Profile', params: { profileId: post.creatorId } }"
         >
@@ -30,12 +32,8 @@
         </router-link>
       </div>
       <!-- TO DO add conditional v-if statement for delete Button -->
-      <button
-        v-if="post.creatorId == account.id"
-        class="btn btn-danger"
-        @click="deletePost(post)"
-      >
-        delete me
+      <button v-if="post.creatorId == account.id" class=" row btn btn-danger" @click="deletePost(post)">
+        Delete Post
       </button>
     </div>
   </div>
@@ -57,7 +55,6 @@ export default {
     // profile: {type: Profile, required: true}
   },
   setup() {
-    const editing = ref(false);
     return {
       account: computed(() => AppState.account),
       async deletePost(post) {
@@ -89,6 +86,6 @@ export default {
 <style>
 .post-img {
   min-height: 200px;
-  min-width: 200px;
+  min-width: 150px;
 }
 </style>

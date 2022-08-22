@@ -1,10 +1,10 @@
 <template>
   <nav class=" container-fluid navbar navbar-expand-lg navbar-dark bg-info px-3">
       <!-- LOGIN COMPONENT HERE -->
-    <div class="col-1">  
+    <div class="col-md-1">  
       <Login />
     </div>
-    <div class="offset-9 col-2">
+    <div class="offset-md-9 col-md-2">
       
         <router-link :to="{ name: 'Search' }">
            <button class="btn btn-primary btn-link btn-outline-dark"><h5>Search Posts</h5> </button>

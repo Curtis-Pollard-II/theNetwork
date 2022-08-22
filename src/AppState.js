@@ -20,4 +20,6 @@ export const AppState = reactive({
 
     activePost: null,
 
+    searchedPosts: [],
+
 })

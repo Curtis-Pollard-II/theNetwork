@@ -26,6 +26,10 @@
         <input type="text" class="form-control" v-model="editable.graduated" required name="graduated">
       </div>
       <div>
+        <label for="class">Class of ...</label>
+        <input type="text" class="form-control" v-model="editable.class" required name="class">
+      </div>
+      <div>
         <label for="bio">Bio:</label>
         <textarea type="text" class="form-control" v-model="editable.bio" required name="bio" rows="8"
           style="resize:none"></textarea>
