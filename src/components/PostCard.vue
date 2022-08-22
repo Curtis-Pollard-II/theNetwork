@@ -1,41 +1,39 @@
 <template>
-  <div class="container bg-light text-dark">
+  <div class="container bg-secondary text-dark">
     <div class="row">
-      <img class="post-img col-5" :src="post.imgUrl" alt="" />
-      <div class="col-7">
-        <p class="fs-5">{{ post.creator.name }}</p>
+      <img class="post-img img-fluid col-md-4" :src="post.imgUrl" alt="" />
+      <div class="col-md-8">
+        <div>
+          <p class="fs-5 text-info">
+            {{ post.creator.name }}
+            
+            <router-link :to="{ name: 'Profile', params: { profileId: post.creatorId } }">
+              <img :src="post.creator.picture" class="selectable" />
+            </router-link>
+          </p>
+        </div>
+        <hr />
         <p class="fs-8">{{ post.body }}</p>
+      
+
+      
+        <p class="selectable" @click="likePost(post)">
+          👍 <b>{{ post.likeIds.length }}</b> 👍
+        </p>
+        <p class="text-end">{{ new Date(post.createdAt).toLocaleDateString("pt-BR", { month: "short", day: "numeric", }) }}</p>
+        
+
       </div>
     </div>
 
-    <div class="row d-flex">
-      <div class="col-md-4 text-center">
-        <p class="selectable" @click="likePost(post)">
-         👍  <b>{{ post.likeIds.length }}</b>  👍
-        </p>
-      </div>
-      <div class="col-md-4 text-center">
-        <p>
-          {{
-            new Date(post.createdAt).toLocaleDateString("pt-BR", {
-              month: "short",
-              day: "numeric",
-            })
-          }}
-        </p>
-      </div>
-      <div class="col-md-4 text-center">
-        <router-link
-          :to="{ name: 'Profile', params: { profileId: post.creatorId } }"
-        >
-          <img :src="post.creator.picture" class="selectable" />
-        </router-link>
-      </div>
-      <!-- TO DO add conditional v-if statement for delete Button -->
-      <button v-if="post.creatorId == account.id" class=" row btn btn-danger" @click="deletePost(post)">
-        Delete Post
-      </button>
-    </div>
+    <!-- TO DO add conditional v-if statement for delete Button -->
+    <button
+      v-if="post.creatorId == account.id"
+      class="row btn btn-danger"
+      @click="deletePost(post)"
+    >
+      Delete Post
+    </button>
   </div>
 </template>
 
