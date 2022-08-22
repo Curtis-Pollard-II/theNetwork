@@ -11,17 +11,32 @@
       <p>{{ profile.github }}</p>
       <p>{{ profile.linkedin }}</p>
       <p>{{ profile.class }}</p>
+      <p v-if="profile.graduated">Graduated</p>
+        <p v-else>😿Not Graduated😿</p>
 
     </div>
 
   <div class="container">
       <div class="row d-flex justify-content-center">
       <div class="col-md-7" v-for="(p, index) in posts" :key="index">
-        <PostCard :post="p" />
+        <PostCard :post="p" /> 
       </div>
     </div>
   </div>
   </div>
+  
+  <div class="row d-flex justify-content-between">
+
+      <div class="col-3">
+        <button @click="changePage(previousPage)" :disabled="!previousPage">Previous</button>
+      </div>
+    
+
+      <div class="col-3 text-end">
+        <button @click="changePage(nextPage)" :disabled="!nextPage">Next</button>
+      </div>
+
+    </div>
 
 </template>
 
@@ -71,7 +86,17 @@ export default {
       account: computed(() => AppState.account),
       profile: computed(() => AppState.activeProfile),
       cover: computed(() => `url(${AppState.activeProfile?.coverImg || 'https://cdn.pixabay.com/photo/2017/07/16/17/33/background-2509983_1280.jpg'})`),
-      posts: computed(() => AppState.profilePosts)
+      posts: computed(() => AppState.profilePosts),
+      nextPage: computed(() => AppState.nextPage),
+      previousPage: computed(() => AppState.previousPage),
+      
+      async changePage(url){
+        try {
+          await postsService.changeProfilePage(url)
+        } catch (error) {
+          
+        }
+      }
     }
   }
 }

@@ -3,10 +3,10 @@ import { Post } from "../models/Post"
 import { logger } from "../utils/Logger"
 import { bcwSandbox } from "./AxiosService"
 class PostsService {
-    async getPosts(){
+    async getPosts() {
         const res = await bcwSandbox.get('api/posts')
         logger.log('getting posts from the service', res.data)
-        logger.log ('posts please', res.data.posts)
+        logger.log('posts please', res.data.posts)
         AppState.nextPage = res.data.newer
         AppState.previousPage = res.data.older
         logger.log(AppState.nextPage, 'next page')
@@ -23,38 +23,59 @@ class PostsService {
     async changePage(url) {
         logger.log(url)
         const res = await bcwSandbox.get(url)
-        AppState.posts = res.data.posts.map(p=>new Post(p))
+        AppState.posts = res.data.posts.map(p => new Post(p))
         logger.log('posts', AppState.posts)
+        AppState.nextPage = res.data.newer
+        AppState.previousPage = res.data.older
+    }
+    async changeProfilePage(url) {
+        logger.log(url)
+        const res = await bcwSandbox.get(url)
+        AppState.profilePosts = res.data.posts.map(p => new Post(p))
+        logger.log('posts', AppState.profilePosts)
         AppState.nextPage = res.data.newer
         AppState.previousPage = res.data.older
     }
     async getPostsByCreatorId(creatorId) {
         const res = await bcwSandbox.get('api/posts', {
-          params: {
-            creatorId
-          }
+            params: {
+                creatorId
+            }
         })
         // logger.log('creater Id Posts in the service', res.data)
+        AppState.nextPage = res.data.newer
+        AppState.previousPage = res.data.older
+        logger.log(AppState.nextPage, 'next page')
+        logger.log(AppState.previousPage, 'previous')
         AppState.profilePosts = res.data.posts.map(p => new Post(p))
-      }
+    }
 
-      async editPost(postData) {
-        const res = await bcwSandbox.put(`api/posts/${postData.id}`, postData)
-    
-        const index = AppState.posts.findIndex(p => p.id == postData.id)
-    
-        AppState.posts.splice(index, 1, new Post(res.data))
-    
-      }
-
-      async deletePost(postId) {
+    async deletePost(postId) {
         const res = await bcwSandbox.delete(`api/posts/${postId}`)
         AppState.posts = AppState.posts.filter(p => p.id != postId)
-      }
-    
+    }
 
-    
-        
+    async getPostsBySearch(searchText) {
+        const res = await bcwSandbox.get('api/posts', {
+            params: {
+                query: searchText
+            }
+        })
+        logger.log(res.data.posts, 'searched posts')
+        AppState.posts = res.data.posts.map(m => new Post(m))
+    }
+
+    async likePost(postData){
+        let res = await bcwSandbox.post(`api/posts/${postData.id}/like`)
+        let postLike = new Post(res.data)
+        let postIndex = AppState.posts.findIndex(p => p.id == postData.id)
+        AppState.posts.splice(postIndex, 1, postLike)
+    }
+
+
+
+
+
 
 
 }
